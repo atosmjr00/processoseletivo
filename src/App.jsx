@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { ArrowDownRight, ArrowRight, CheckCircle2, ChevronDown, HeartHandshake, Lightbulb, Menu, ShieldCheck, Sparkles, Users, X } from 'lucide-react';
 import { supabase, supabaseConfigured } from './lib/supabase';
 
