@@ -37,6 +37,7 @@ export default function Assessment() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
   const [saved, setSaved] = useState(false);
+  const [showProfileStep, setShowProfileStep] = useState(false);
 
   useEffect(() => {
     document.title = 'Etapa 2 — Avaliação de perfil | Prévia interna';
@@ -54,7 +55,8 @@ export default function Assessment() {
   async function finishAssessment() {
     setError('');
     if (!profile.full_name.trim() || !profile.email.trim() || !profile.consent) {
-      setError('Preencha seu nome, e-mail e aceite o aviso de privacidade para concluir.');
+      setError('Preencha seu nome completo, e-mail e marque a caixa de consentimento para continuar.');
+      window.setTimeout(() => document.getElementById('assessment-profile')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
       return;
     }
     if (answeredCount !== questions.length) {
@@ -116,12 +118,13 @@ export default function Assessment() {
         <div className="answer-list">
           {question.options.map((option, index) => <button type="button" key={option} className={answers[current] === index ? 'answer-option answer-selected' : 'answer-option'} onClick={() => setAnswer(current, index)}><span className="answer-letter">{String.fromCharCode(65 + index)}</span><span>{option}</span><span className="answer-radio">{answers[current] === index && <i/>}</span></button>)}
         </div>
-        <div className="question-navigation"><button className="assessment-secondary" disabled={current === 0} onClick={() => setCurrent(value => value - 1)}><ChevronLeft size={17}/> Anterior</button><span>{current + 1} de {questions.length}</span>{current < questions.length - 1 ? <button className="assessment-primary" disabled={answers[current] === undefined} onClick={() => setCurrent(value => value + 1)}>Próxima <ChevronRight size={17}/></button> : <button className="assessment-primary" onClick={finishAssessment} disabled={saving}>{saving ? 'Registrando...' : 'Concluir avaliação'} <CheckCircle2 size={17}/></button>}</div>
+        <div className="question-navigation"><button className="assessment-secondary" disabled={current === 0} onClick={() => setCurrent(value => value - 1)}><ChevronLeft size={17}/> Anterior</button><span>{current + 1} de {questions.length}</span>{current < questions.length - 1 ? <button className="assessment-primary" disabled={answers[current] === undefined} onClick={() => setCurrent(value => value + 1)}>Próxima <ChevronRight size={17}/></button> : <button className="assessment-primary" onClick={() => { setShowProfileStep(true); setError(''); window.setTimeout(() => document.getElementById('assessment-profile')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80); }}>Preencher meus dados <ArrowRight size={17}/></button>}</div>
       </div>
-      {current === questions.length - 1 && <div className="assessment-profile">
+      {current === questions.length - 1 && showProfileStep && <div className="assessment-profile" id="assessment-profile">
         <div><h3>Último passo: seus dados</h3><p>Você chegou ao fim das perguntas! Preencha seu nome completo e e-mail abaixo para identificar sua avaliação e concluir esta etapa.</p></div>
         <div className="assessment-profile-grid"><label>Nome completo<input value={profile.full_name} onChange={e => setProfile(old => ({ ...old, full_name: e.target.value }))} autoComplete="name" placeholder="Seu nome completo"/></label><label>E-mail usado na candidatura<input type="email" value={profile.email} onChange={e => setProfile(old => ({ ...old, email: e.target.value }))} autoComplete="email" placeholder="voce@email.com"/></label></div>
         <label className="assessment-consent"><input type="checkbox" checked={profile.consent} onChange={e => setProfile(old => ({ ...old, consent: e.target.checked }))}/><span>Concordo com o uso das minhas respostas e do resultado para avaliação desta candidatura, conforme o aviso de privacidade do processo seletivo.</span></label>
+        <div className="assessment-profile-actions"><button className="assessment-primary" onClick={finishAssessment} disabled={saving}>{saving ? 'Concluindo...' : 'Próximo: concluir avaliação'} <ArrowRight size={17}/></button></div>
       </div>}
       {error && <p className="assessment-error" role="alert">{error}</p>}
       {!supabaseConfigured && <p className="assessment-preview-note"><CircleHelp size={16}/> Modo de prévia: o resultado será calculado nesta página, mas não será salvo no banco enquanto o Supabase não estiver configurado.</p>}
