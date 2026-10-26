@@ -50,3 +50,29 @@
 .assessment-profile-actions .assessment-primary{min-height:46px;padding:0 20px;font-size:13px}
 .assessment-profile{scroll-margin-top:24px}
 @media(max-width:560px){.assessment-profile-actions .assessment-primary{width:100%;justify-content:center}.assessment-profile-grid{grid-template-columns:1fr}}
+
+
+/* Animated, reassuring completion screen for stage two */
+.completion-screen{position:relative;overflow:hidden}
+.completion-screen h1{font:800 clamp(34px,5vw,47px)/1.12 Manrope,sans-serif;letter-spacing:-2px;margin:18px 0 14px}
+.completion-screen h1 em{font-style:normal;color:#719c3e}
+.completion-celebration{position:relative;display:grid;place-items:center;width:160px;height:145px;margin:0 auto 22px;animation:completionFloat 3.8s ease-in-out infinite}
+.completion-check{z-index:2;display:grid;place-items:center;width:86px;height:86px;border-radius:28px;background:linear-gradient(145deg,#f0f9e8,#dcefc8);color:#63943a;box-shadow:0 12px 35px #8eb65c26;animation:completionPop .7s cubic-bezier(.2,.8,.2,1.2) both}
+.celebration-orbit{position:absolute;border:1px solid #dce9ce;border-radius:50%;animation:completionSpin 13s linear infinite}
+.celebration-orbit.orbit-a{width:133px;height:133px}
+.celebration-orbit.orbit-b{width:105px;height:105px;border-style:dashed;animation-direction:reverse;animation-duration:17s}
+.celebration-spark{position:absolute;display:grid;place-items:center;color:#79a94a;animation:completionTwinkle 2.4s ease-in-out infinite}
+.spark-a{left:15px;top:25px}.spark-b{right:16px;top:35px;animation-delay:.4s}.spark-c{right:29px;bottom:14px;animation-delay:.8s}
+.completion-lede{max-width:490px}
+.completion-next-step{display:flex;gap:14px;align-items:flex-start;width:100%;margin:24px 0 14px;padding:20px;text-align:left;border:1px solid #e1e8d8;border-radius:15px;background:linear-gradient(135deg,#fff,#f8fbf4)}
+.completion-next-icon{flex-shrink:0;display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:#e8f3dc;color:#65953a}
+.completion-next-step strong{display:block;margin:2px 0 7px;font-size:13px;color:#30352b}
+.completion-next-step p{margin:0;color:#6d7068;font-size:12px;line-height:1.8}
+.completion-thanks{display:flex;align-items:flex-start;gap:9px;max-width:520px;text-align:left;color:#68735d;font-size:11px;line-height:1.8;margin:8px 0 20px}
+.completion-thanks svg{flex-shrink:0;color:#78a746;margin-top:1px}
+@keyframes completionFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes completionPop{0%{opacity:0;transform:scale(.55) rotate(-12deg)}70%{transform:scale(1.08) rotate(3deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+@keyframes completionSpin{to{transform:rotate(360deg)}}
+@keyframes completionTwinkle{0%,100%{opacity:.45;transform:scale(.85)}50%{opacity:1;transform:scale(1.15)}}
+@media(max-width:560px){.completion-celebration{transform:scale(.92);margin-bottom:12px}.completion-next-step{padding:16px;gap:11px}.completion-next-step p{font-size:11px}}
+@media(prefers-reduced-motion:reduce){.completion-celebration,.completion-check,.celebration-orbit,.celebration-spark{animation:none!important}}
