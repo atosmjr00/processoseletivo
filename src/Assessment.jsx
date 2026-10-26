@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, CircleHelp, Clock3, GraduationCap, ShieldCheck, Sparkles, Target } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, ChevronLeft, ChevronRight, CircleHelp, Clock3, GraduationCap, HeartHandshake, ShieldCheck, Sparkles, Target } from 'lucide-react';
 import { supabase, supabaseConfigured } from './lib/supabase';
 
 const questions = [
