@@ -43,6 +43,12 @@ export default function Assessment() {
     document.title = 'Etapa 2 — Avaliação de perfil | Prévia interna';
   }, []);
 
+  useEffect(() => {
+    if (result) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [result]);
+
   const question = questions[current];
   const answeredCount = Object.keys(answers).length;
   const score = questions.reduce((total, item, index) => total + (answers[index] === item.correct ? 1 : 0), 0);
@@ -143,6 +149,7 @@ export default function Assessment() {
       <div className="assessment-eyebrow"><span/> ETAPA 2 FINALIZADA</div>
       <h1>Pronto! Você concluiu<br/><em>mais uma etapa.</em></h1>
       <p className="completion-lede">{saved ? 'Suas respostas e seus dados foram enviados com sucesso.' : 'Você chegou ao final da avaliação. Esta é uma prévia: seus dados ainda não foram enviados para a equipe.'}</p>
+      <div className="result-score completion-score"><strong>{result.score}<small>/20</small></strong><div><b>{result.percent}% de aproveitamento</b><span>Resultado da avaliação de conhecimentos</span></div></div>
       <div className="completion-next-step">
         <div className="completion-next-icon"><Clock3 size={20}/></div>
         <div><strong>E agora, o que acontece?</strong><p>Basta aguardar o retorno da empresa. A equipe responsável analisará sua candidatura e entrará em contato pelo e-mail informado caso haja novidades sobre as próximas etapas.</p></div>
