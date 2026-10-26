@@ -131,15 +131,24 @@ export default function Assessment() {
       <button className="assessment-back-link" onClick={() => { window.location.href = '/'; }}><ArrowLeft size={15}/> Voltar à página de carreiras</button>
     </main>}
 
-    {result && <main className="assessment-result">
-      <div className="result-icon">{result.outcome === 'apta' ? <CheckCircle2 size={34}/> : result.outcome === 'revisao' ? <Target size={34}/> : <GraduationCap size={34}/>}</div>
-      <div className="assessment-eyebrow"><span/> AVALIAÇÃO CONCLUÍDA</div>
-      <h1>{result.outcome === 'apta' ? 'Excelente trabalho!' : result.outcome === 'revisao' ? 'Avaliação concluída.' : 'Obrigado pela participação.'}</h1>
-      <p>{result.outcome === 'apta' ? 'Seu desempenho atingiu a pontuação esperada nesta etapa. A equipe responsável poderá revisar seu resultado e orientar sobre os próximos passos.' : result.outcome === 'revisao' ? 'Seu resultado será encaminhado para revisão da equipe responsável, que avaliará o conjunto da candidatura.' : 'Esta avaliação indica pontos que podem ser desenvolvidos. A equipe responsável fará a análise do resultado conforme os critérios do processo.'}</p>
-      <div className="result-score"><strong>{result.score}<small>/20</small></strong><div><b>{result.percent}% de aproveitamento</b><span>Resultado da avaliação de conhecimentos</span></div></div>
-      <div className="result-disclaimer"><ShieldCheck size={17}/><span>Este resultado é uma etapa de avaliação e não representa, isoladamente, uma decisão final de contratação.</span></div>
-      {saved && <p className="result-saved"><CheckCircle2 size={16}/> Suas respostas foram registradas.</p>}
-      {!supabaseConfigured && <p className="assessment-preview-note"><CircleHelp size={16}/> Prévia interna: resultado não salvo no banco.</p>}
+    {result && <main className="assessment-result completion-screen">
+      <div className="completion-celebration" aria-hidden="true">
+        <span className="celebration-orbit orbit-a" />
+        <span className="celebration-orbit orbit-b" />
+        <span className="celebration-spark spark-a"><Sparkles size={19}/></span>
+        <span className="celebration-spark spark-b"><Sparkles size={14}/></span>
+        <span className="celebration-spark spark-c"><Sparkles size={17}/></span>
+        <div className="completion-check"><CheckCircle2 size={42}/></div>
+      </div>
+      <div className="assessment-eyebrow"><span/> ETAPA 2 FINALIZADA</div>
+      <h1>Pronto! Você concluiu<br/><em>mais uma etapa.</em></h1>
+      <p className="completion-lede">{saved ? 'Suas respostas e seus dados foram enviados com sucesso.' : 'Você chegou ao final da avaliação. Esta é uma prévia: seus dados ainda não foram enviados para a equipe.'}</p>
+      <div className="completion-next-step">
+        <div className="completion-next-icon"><Clock3 size={20}/></div>
+        <div><strong>E agora, o que acontece?</strong><p>Basta aguardar o retorno da empresa. A equipe responsável analisará sua candidatura e entrará em contato pelo e-mail informado caso haja novidades sobre as próximas etapas.</p></div>
+      </div>
+      <div className="completion-thanks"><HeartHandshake size={18}/><span>Obrigado por dedicar seu tempo e participar do processo seletivo. Desejamos sucesso!</span></div>
+      {!supabaseConfigured && <p className="assessment-preview-note"><CircleHelp size={16}/> Prévia interna: a avaliação não foi salva no banco. Configure o Supabase para testar o envio real.</p>}
       <button className="assessment-secondary" onClick={() => { window.location.href = '/'; }}><ArrowLeft size={16}/> Voltar à página de carreiras</button>
     </main>}
 
