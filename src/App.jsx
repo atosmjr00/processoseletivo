@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import Assessment from './Assessment';
 import { ArrowDownRight, ArrowRight, CheckCircle2, ChevronDown, HeartHandshake, Lightbulb, Menu, ShieldCheck, Sparkles, Users, X } from 'lucide-react';
 import { supabase, supabaseConfigured } from './lib/supabase';
 
 const initialForm = { full_name: '', email: '', phone: '', city: '', linkedin_url: '', experience: '', motivation: '', salary_expectation: '', privacy_consent: false };
 const jobTitle = 'Suporte ao Cliente e Customer Success (CS) para E-commerce/SaaS';
 
-export default function App() {
+function LandingPage() {
   const [form, setForm] = useState(initialForm);
   const [sending, setSending] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -76,4 +77,9 @@ export default function App() {
     </main>
     <footer className="footer"><a className="brand footer-brand" href="#inicio"><img className="brand-mark" src="https://greenn.com.br/assets/97b45970-d36b-4d47-a32a-16f596a50425.png" alt="" /><span>greenn<span className="brand-period">.</span></span></a><span>PRÉVIA INTERNA · NÃO PUBLICADA</span><a href="#inicio">Voltar ao topo ↑</a></footer>
   </div>;
+}
+
+export default function App() {
+  const secondStage = new URLSearchParams(window.location.search).get('etapa') === '2';
+  return secondStage ? <Assessment /> : <LandingPage />;
 }
