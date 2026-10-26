@@ -118,11 +118,11 @@ export default function Assessment() {
         </div>
         <div className="question-navigation"><button className="assessment-secondary" disabled={current === 0} onClick={() => setCurrent(value => value - 1)}><ChevronLeft size={17}/> Anterior</button><span>{current + 1} de {questions.length}</span>{current < questions.length - 1 ? <button className="assessment-primary" disabled={answers[current] === undefined} onClick={() => setCurrent(value => value + 1)}>Próxima <ChevronRight size={17}/></button> : <button className="assessment-primary" onClick={finishAssessment} disabled={saving}>{saving ? 'Registrando...' : 'Concluir avaliação'} <CheckCircle2 size={17}/></button>}</div>
       </div>
-      <div className="assessment-profile">
-        <div><h3>Identificação do candidato</h3><p>Usaremos estes dados para associar o resultado à sua participação no processo seletivo.</p></div>
+      {current === questions.length - 1 && <div className="assessment-profile">
+        <div><h3>Último passo: seus dados</h3><p>Você chegou ao fim das perguntas! Preencha seu nome completo e e-mail abaixo para identificar sua avaliação e concluir esta etapa.</p></div>
         <div className="assessment-profile-grid"><label>Nome completo<input value={profile.full_name} onChange={e => setProfile(old => ({ ...old, full_name: e.target.value }))} autoComplete="name" placeholder="Seu nome completo"/></label><label>E-mail usado na candidatura<input type="email" value={profile.email} onChange={e => setProfile(old => ({ ...old, email: e.target.value }))} autoComplete="email" placeholder="voce@email.com"/></label></div>
         <label className="assessment-consent"><input type="checkbox" checked={profile.consent} onChange={e => setProfile(old => ({ ...old, consent: e.target.checked }))}/><span>Concordo com o uso das minhas respostas e do resultado para avaliação desta candidatura, conforme o aviso de privacidade do processo seletivo.</span></label>
-      </div>
+      </div>}
       {error && <p className="assessment-error" role="alert">{error}</p>}
       {!supabaseConfigured && <p className="assessment-preview-note"><CircleHelp size={16}/> Modo de prévia: o resultado será calculado nesta página, mas não será salvo no banco enquanto o Supabase não estiver configurado.</p>}
       <button className="assessment-back-link" onClick={() => { window.location.href = '/'; }}><ArrowLeft size={15}/> Voltar à página de carreiras</button>
