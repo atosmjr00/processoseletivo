@@ -40,7 +40,7 @@ export default function Assessment() {
   const [showProfileStep, setShowProfileStep] = useState(false);
 
   useEffect(() => {
-    document.title = 'Etapa 2 — Avaliação de perfil | Prévia interna';
+    document.title = 'Etapa 2 — Avaliação de perfil | Carreiras Greenn';
   }, []);
 
   useEffect(() => {
@@ -60,6 +60,10 @@ export default function Assessment() {
 
   async function finishAssessment() {
     setError('');
+    if (!supabaseConfigured) {
+      setError('Não foi possível enviar sua avaliação neste momento. Tente novamente mais tarde ou entre em contato com a equipe responsável.');
+      return;
+    }
     if (!profile.full_name.trim() || !profile.email.trim() || !profile.consent) {
       setError('Preencha seu nome completo, e-mail e marque a caixa de consentimento para continuar.');
       window.setTimeout(() => document.getElementById('assessment-profile')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50);
@@ -95,7 +99,6 @@ export default function Assessment() {
   }
 
   return <div className="assessment-shell">
-    <div className="preview-banner"><span className="preview-dot" /> PRÉVIA INTERNA · NÃO PUBLICADA · CONTEÚDO SUJEITO À APROVAÇÃO</div>
     <header className="assessment-topbar">
       <a className="brand" href="/" aria-label="Página inicial"><img className="brand-mark" src="https://greenn.com.br/assets/97b45970-d36b-4d47-a32a-16f596a50425.png" alt="" /><span>greenn<span className="brand-period">.</span></span></a>
       <span className="assessment-stage"><ShieldCheck size={15}/> PROCESSO SELETIVO · ETAPA 2</span>
@@ -111,7 +114,6 @@ export default function Assessment() {
         <div className="welcome-stats"><div><Clock3/><strong>15–20 min</strong><small>Tempo estimado</small></div><div><Target/><strong>20 questões</strong><small>Múltipla escolha</small></div><div><GraduationCap/><strong>Perfil prático</strong><small>Suporte e CS</small></div></div>
         <div className="welcome-note"><ShieldCheck size={17}/><span>Responda com atenção e escolha a alternativa que representa a conduta mais profissional. A avaliação considera conhecimentos de atendimento, comunicação, segurança e resolução de problemas.</span></div>
         <button className="assessment-primary" onClick={() => setIntro(false)}>Iniciar avaliação <ArrowRight size={18}/></button>
-        <span className="welcome-footnote">Esta é uma prévia interna do processo seletivo e ainda não representa uma comunicação oficial de contratação.</span>
       </div>
     </section>}
 
@@ -133,7 +135,6 @@ export default function Assessment() {
         <div className="assessment-profile-actions"><button className="assessment-primary" onClick={finishAssessment} disabled={saving}>{saving ? 'Concluindo...' : 'Próximo: concluir avaliação'} <ArrowRight size={17}/></button></div>
       </div>}
       {error && <p className="assessment-error" role="alert">{error}</p>}
-      {!supabaseConfigured && <p className="assessment-preview-note"><CircleHelp size={16}/> Modo de prévia: o resultado será calculado nesta página, mas não será salvo no banco enquanto o Supabase não estiver configurado.</p>}
       <button className="assessment-back-link" onClick={() => { window.location.href = '/'; }}><ArrowLeft size={15}/> Voltar à página de carreiras</button>
     </main>}
 
@@ -148,17 +149,16 @@ export default function Assessment() {
       </div>
       <div className="assessment-eyebrow"><span/> ETAPA 2 FINALIZADA</div>
       <h1>Pronto! Você concluiu<br/><em>mais uma etapa.</em></h1>
-      <p className="completion-lede">{saved ? 'Suas respostas e seus dados foram enviados com sucesso.' : 'Você chegou ao final da avaliação. Esta é uma prévia: seus dados ainda não foram enviados para a equipe.'}</p>
+      <p className="completion-lede">Suas respostas e seus dados foram enviados com sucesso.</p>
       <div className="result-score completion-score"><strong>{result.score}<small>/20</small></strong><div><b>{result.percent}% de aproveitamento</b><span>Resultado da avaliação de conhecimentos</span></div></div>
       <div className="completion-next-step">
         <div className="completion-next-icon"><Clock3 size={20}/></div>
         <div><strong>E agora, o que acontece?</strong><p>Basta aguardar o retorno da empresa. A equipe responsável analisará sua candidatura e entrará em contato pelo e-mail informado caso haja novidades sobre as próximas etapas.</p></div>
       </div>
       <div className="completion-thanks"><HeartHandshake size={18}/><span>Obrigado por dedicar seu tempo e participar do processo seletivo. Desejamos sucesso!</span></div>
-      {!supabaseConfigured && <p className="assessment-preview-note"><CircleHelp size={16}/> Prévia interna: a avaliação não foi salva no banco. Configure o Supabase para testar o envio real.</p>}
       <button className="assessment-secondary" onClick={() => { window.location.href = '/'; }}><ArrowLeft size={16}/> Voltar à página de carreiras</button>
     </main>}
 
-    <footer className="assessment-footer"><span>GREENN · PRÉVIA INTERNA</span><span>Seus dados devem ser tratados conforme o aviso de privacidade aprovado.</span></footer>
+    <footer className="assessment-footer"><span>GREENN · CARREIRAS</span><span>Seus dados são utilizados para conduzir este processo seletivo.</span></footer>
   </div>;
 }
