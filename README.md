@@ -29,14 +29,14 @@ Landing page responsiva para a vaga **Suporte ao Cliente e Customer Success (CS)
 - **Cargo:** Suporte ao Cliente e Customer Success (CS) para E-commerce/SaaS
 - **Modelo:** remoto
 - **Senioridade:** pleno
-- **Etapa de formação:** durante a entrevista, será apresentado um curso de 12 horas com certificação. A pessoa candidata deverá concluir o curso e enviar o certificado à equipe para que a avaliação de contratação possa ser finalizada.
+- **Etapa de formação:** durante a entrevista, será apresentado um curso de 8 horas com certificação. A pessoa candidata deverá concluir o curso e enviar o certificado à equipe para que a avaliação de contratação possa ser finalizada.
 
 A equipe deve confirmar antes da publicação se o curso tem custo, prazo, conteúdo, entidade certificadora e procedimento de validação. Não presumir que o curso é gratuito.
 
 ## Antes de publicar
 - Validar autorização, marca, conteúdo e identidade visual.
 - Confirmar faixa salarial, vínculo, horário, benefícios e requisitos finais da vaga.
-- Esclarecer os detalhes do curso de 12 horas e da certificação.
+- Esclarecer os detalhes do curso de 8 horas e da certificação.
 - Aprovar aviso de privacidade/LGPD.
 - Configurar e testar o Supabase e o fluxo administrativo com acesso restrito.
 - Revisar acessibilidade, segurança e experiência mobile.
